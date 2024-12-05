@@ -21,12 +21,13 @@ namespace ProductManagement.Application.Products.Commands.UpdateProduct
             _productRepository = productRepository;
             _mapper = mapper;
         }
-        public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var product = _mapper.From(request).AdaptToType<Product>();
 
-            await _productRepository.UpdateProductAsync(product);
+             _productRepository.UpdateProductAsync(product);
 
+            return Task.CompletedTask;
         }
     }
 }

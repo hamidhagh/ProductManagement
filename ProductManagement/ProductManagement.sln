@@ -16,6 +16,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductManagement.Infrastructure", "src\ProductManagement.Infrastructure\ProductManagement.Infrastructure.csproj", "{A95DC468-BA33-4B6B-90AF-0F2A5FED7EF5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductManagement.API", "src\ProductManagement.API\ProductManagement.API.csproj", "{BFB6C8CD-A9DA-4FE3-A7F8-53482FF3B2D7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A95DC468-BA33-4B6B-90AF-0F2A5FED7EF5} = {A95DC468-BA33-4B6B-90AF-0F2A5FED7EF5}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.Domain.IntegrationTest", "tests\ProductManagement.Domain.IntegrationTest\ProductManagement.Domain.IntegrationTest.csproj", "{DC748EE2-696E-48DE-925B-4FE31C8BF5C2}"
 EndProject

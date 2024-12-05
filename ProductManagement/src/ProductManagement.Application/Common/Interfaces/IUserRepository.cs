@@ -12,7 +12,7 @@ namespace ProductManagement.Application.Common.Interfaces
         Task AddUserAsync(User user);
         Task<bool> ExistsByEmailAsync(string email);
         Task<User?> GetByEmailAsync(string email);
-        Task<User?> GetByIdAsync(Guid userId);
+        Task<User?> GetByIdAsync(string userId);
         Task UpdateAsync(User user);
     }
 }
