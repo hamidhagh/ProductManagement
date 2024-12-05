@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductManagement.Domain.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,10 @@ namespace ProductManagement.Domain.Users
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string PasswordHash { get; set; } = null!;
+
+        public bool IsCorrectPasswordHash(string password, IPasswordHasher passwordHasher)
+        {
+            return passwordHasher.IsCorrectPassword(password, PasswordHash);
+        }
     }
 }
