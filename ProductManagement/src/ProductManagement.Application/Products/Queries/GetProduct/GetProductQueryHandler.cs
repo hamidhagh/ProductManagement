@@ -14,24 +14,22 @@ using System.Threading.Tasks;
 
 namespace ProductManagement.Application.Products.Queries.GetProduct
 {
-    public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ErrorOr<ProductDto>>
+    public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDto>
     {
         private readonly IProductRepository _productRepository;
-        private readonly Mapper _mapper;
 
-        public GetProductQueryHandler(IProductRepository productRepository, Mapper mapper)
+        public GetProductQueryHandler(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _mapper = mapper;
         }
-        public async Task<ErrorOr<ProductDto>> Handle(GetProductQuery request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
-            var product = _productRepository.GetByIdAsync(request.id);
+            var product = await _productRepository.GetByIdAsync(request.id);
 
-            if (product == null)
-            {
-                return Error.NotFound(description: "Product not found");
-            }
+            //if (product == null)
+            //{
+            //    return Error.NotFound(description: "Product not found");
+            //}
             //if (await _productRepository.GetByIdAsync(request.id) is not Product product)
             //{
             //    return Error.NotFound(description: "Product not found");

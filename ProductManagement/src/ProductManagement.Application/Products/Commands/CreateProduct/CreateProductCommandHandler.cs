@@ -16,16 +16,14 @@ namespace ProductManagement.Application.Products.Commands.CreateProduct
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ProductDto>
     {
         private readonly IProductRepository _productRepository;
-        private readonly Mapper _mapper;
 
-        public CreateProductCommandHandler(IProductRepository productRepository, Mapper mapper)
+        public CreateProductCommandHandler(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _mapper = mapper;
         }
         public async Task<ProductDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var product = _mapper.From(request).AdaptToType<Product>();
+            var product = request.Adapt<Product>();
 
             var productAddResult = await _productRepository.AddProductAsync(product);
 

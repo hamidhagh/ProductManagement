@@ -23,6 +23,8 @@ namespace ProductManagement.Infrastructure.Products.Persistence
         {
             await _dbContext.Products.AddAsync(product);
 
+            await _dbContext.SaveChangesAsync();
+
             return product;
         }
 
@@ -30,24 +32,28 @@ namespace ProductManagement.Infrastructure.Products.Persistence
         {
             await _dbContext.Products.AddRangeAsync(products);
 
+            await _dbContext.SaveChangesAsync();
+
             return products;
         }
 
-        public Task DeleteProductAsync(Product product)
+        public async Task DeleteProductAsync(Product product)
         {
             _dbContext.Remove(product);
 
-            return Task.CompletedTask;
+            await _dbContext.SaveChangesAsync();
+
         }
 
-        public Task DeleteRangeAsync(List<Product> products)
+        public async Task DeleteRangeAsync(List<Product> products)
         {
             _dbContext.Remove(products);
 
-            return Task.CompletedTask;
+            await _dbContext.SaveChangesAsync();
+
         }
 
-        public async Task<bool> ExistsAsync(Guid id)
+        public async Task<bool> ExistsAsync(int id)
         {
             return await _dbContext.Products.AsNoTracking().AnyAsync(product => product.Id == id);
         }
@@ -57,26 +63,32 @@ namespace ProductManagement.Infrastructure.Products.Persistence
             return await _dbContext.Products.ToListAsync();
         }
 
-        public async Task<List<Product>> GetAllBySearchParamsAsync(SearchParams searchParams)
+        public async Task<List<Product>> GetAllBySearchParamsAsync(Guid? id)
         {
             return await _dbContext.Products
-            .Where(product => product.UserId == searchParams.UserId)
+            .Where(product => product.UserId == id)
             .ToListAsync();
         }
 
-        public async Task<Product?> GetByIdAsync(Guid id)
+        public async Task<Product> GetByIdAsync(int id)
         {
             return await _dbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
         }
 
-        public void UpdateProductAsync(Product product)
+        public async Task UpdateProductAsync(Product product)
         {
             _dbContext.Products.Update(product);
+
+            await _dbContext.SaveChangesAsync();
+
         }
 
-        public void UpdateRangeAsync(List<Product> products)
+        public async Task UpdateRangeAsync(List<Product> products)
         {
             _dbContext.Products.UpdateRange(products);
+
+            await _dbContext.SaveChangesAsync();
+
         }
     }
 }

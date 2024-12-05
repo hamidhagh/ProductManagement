@@ -10,15 +10,29 @@ namespace ProductManagement.Domain.Users
     public class User
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Phone { get; set; }
-        public string? Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
         public string PasswordHash { get; set; } = null!;
 
         public bool IsCorrectPasswordHash(string password, IPasswordHasher passwordHasher)
         {
             return passwordHasher.IsCorrectPassword(password, PasswordHash);
+        }
+
+        public User(
+        string firstName,
+        string lastName,
+        string phone,
+        string email,
+        string passwordHash)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Phone = phone;
+            Email = email;
+            PasswordHash = passwordHash;
         }
     }
 }

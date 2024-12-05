@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Mapster;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using ProductManagement.Application;
 using ProductManagement.Application.Common.Interfaces;
 using ProductManagement.Domain.Common.Interfaces;
 using ProductManagement.Infrastructure;
@@ -28,12 +30,21 @@ namespace ProductManagement.Infrastructure
 
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
+            //services.AddDbContext<ProductManagementDbContext>(options =>
+            //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            //services.AddScoped<IProductRepository, ProductRepository>();
+            //services.AddScoped<IUserRepository, UserRepository>();
+
+            //return services;
+            var config = configuration;
+            TypeAdapterConfig.GlobalSettings.Default.PreserveReference(true);
             services.AddDbContext<ProductManagementDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-
+            services.AddMediatR(o => o.RegisterServicesFromAssembly(typeof(ProductManagementApplication).Assembly));
             return services;
         }
 

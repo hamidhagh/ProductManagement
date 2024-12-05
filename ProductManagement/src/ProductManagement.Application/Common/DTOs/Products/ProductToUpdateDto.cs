@@ -2,7 +2,7 @@
 {
     public class ProductToUpdateDto
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string? Name { get; set; }
         public DateTime ProduceDate { get; set; }
         public string? ManufacturePhone { get; set; }

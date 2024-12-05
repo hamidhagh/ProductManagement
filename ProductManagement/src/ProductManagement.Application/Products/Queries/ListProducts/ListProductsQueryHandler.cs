@@ -15,21 +15,19 @@ namespace ProductManagement.Application.Products.Queries.ListProducts
     public class ListProductsQueryHandler : IRequestHandler<ListProductsQuery, List<ProductDto>>
     {
         private readonly IProductRepository _productRepository;
-        private readonly Mapper _mapper;
 
-        public ListProductsQueryHandler(IProductRepository productRepository, Mapper mapper)
+        public ListProductsQueryHandler(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _mapper = mapper;
         }
-        public async Task<List<ProductDto>> Handle(ListProductsQuery request, CancellationToken cancellationToken)
+        public async Task<List<ProductDto>> Handle(ListProductsQuery? request, CancellationToken cancellationToken)
         {
             List<Product> products;
-            if (request.SearchParams == null)
+            if (!request.Id.HasValue)
             {
-                products = await _productRepository.GetAllAsync();
+                return (await _productRepository.GetAllAsync()).Adapt<List<ProductDto>>();
             }
-            products = await _productRepository.GetAllBySearchParamsAsync(request.SearchParams);
+            products = await _productRepository.GetAllBySearchParamsAsync(request.Id);
 
             return products.Adapt<List<ProductDto>>();
         }

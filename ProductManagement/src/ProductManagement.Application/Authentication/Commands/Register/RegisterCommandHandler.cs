@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using Mapster;
 using MapsterMapper;
 using MediatR;
 using ProductManagement.Application.Authentication.Common;
@@ -19,15 +20,13 @@ namespace ProductManagement.Application.Authentication.Commands.Register
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-        private readonly Mapper _mapper;
 
         public RegisterCommandHandler(IUserRepository userRepository, IPasswordHasher passwordHasher,
-            IJwtTokenGenerator jwtTokenGenerator, Mapper mapper)
+            IJwtTokenGenerator jwtTokenGenerator)
         {
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
             _jwtTokenGenerator = jwtTokenGenerator;
-            _mapper = mapper;
         }
         public async Task<ErrorOr<AuthenticationResult>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
@@ -43,7 +42,12 @@ namespace ProductManagement.Application.Authentication.Commands.Register
                 return hashPasswordResult.Errors;
             }
 
-            var user = _mapper.From(request).AdaptToType<User>();
+            var user = new User(
+            request.FirstName,
+            request.LastName,
+            request.Phone,
+            request.Email,
+            hashPasswordResult.Value);
 
             await _userRepository.AddUserAsync(user);
 

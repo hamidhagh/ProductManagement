@@ -21,6 +21,7 @@ namespace ProductManagement.Infrastructure.Users.Persistence
         public async Task AddUserAsync(User user)
         {
             await _dbContext.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> ExistsByEmailAsync(string email)
@@ -38,11 +39,13 @@ namespace ProductManagement.Infrastructure.Users.Persistence
             return await _dbContext.Users.FirstOrDefaultAsync(user => user.Id == userId);
         }
 
-        public Task UpdateAsync(User user)
+        public async Task UpdateAsync(User user)
         {
             _dbContext.Update(user);
 
-            return Task.CompletedTask;
+            await _dbContext.SaveChangesAsync();
+
+            
         }
     }
 }

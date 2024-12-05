@@ -18,15 +18,13 @@ namespace ProductManagement.Application.Authentication.Queries.Login
         private readonly IUserRepository _userRepository;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IPasswordHasher _passwordHasher;
-        private readonly Mapper _mapper;
 
         public LoginQueryHandler(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator,
-            IPasswordHasher passwordHasher ,Mapper mapper)
+            IPasswordHasher passwordHasher)
         {
             _userRepository = userRepository;
             _jwtTokenGenerator = jwtTokenGenerator;
             _passwordHasher = passwordHasher;
-            _mapper = mapper;
         }
         public async Task<ErrorOr<AuthenticationResult>> Handle(LoginQuery request, CancellationToken cancellationToken)
         {

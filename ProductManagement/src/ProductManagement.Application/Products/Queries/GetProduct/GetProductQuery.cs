@@ -10,5 +10,5 @@ using System.Threading.Tasks;
 
 namespace ProductManagement.Application.Products.Queries.GetProduct
 {
-    public record GetProductQuery(Guid id) : IRequest<ErrorOr<ProductDto>>;    
+    public record GetProductQuery(int id) : IRequest<ProductDto>;    
 }

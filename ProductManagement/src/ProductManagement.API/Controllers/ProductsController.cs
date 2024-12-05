@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Application.Common;
 using ProductManagement.Application.Common.Interfaces;
@@ -14,17 +15,17 @@ namespace ProductManagement.API.Controllers
     public class ProductsController : ApiController
     {
         private readonly ISender _mediator;
-        private readonly IMapper _mapper;
         private readonly ICurrentUserProvider _currentUserProvider;
 
-        public ProductsController(ISender mediator, IMapper mapper, ICurrentUserProvider currentUserProvider)
+        public ProductsController(ISender mediator, ICurrentUserProvider currentUserProvider)
         {
             _mediator = mediator;
-            _mapper = mapper;
             _currentUserProvider = currentUserProvider;
         }
+
         [HttpPost]
-        public async Task<IActionResult> CreateGym(ProductToCreateDto request)
+        [Authorize]
+        public async Task<IActionResult> CreateProduct(ProductToCreateDto request)
         {
             var user = _currentUserProvider.GetCurrentUser();
 
@@ -34,48 +35,49 @@ namespace ProductManagement.API.Controllers
 
             return Ok(createProductResult);
             //return createProductResult.Match(
-            //    gym => CreatedAtAction(
-            //        nameof(GetGym),
-            //        new { subscriptionId, GymId = gym.Id },
-            //        new GymResponse(gym.Id, gym.Name)),
+            //    product => CreatedAtAction(
+            //        nameof(GetProduct),
+            //        new { ProductId = product.Id },
+            //        new ProductResponse(product.Id, product.Name)),
             //    Problem);
         }
 
-        //[HttpDelete("{gymId:guid}")]
-        //public async Task<IActionResult> DeleteProduct(Guid subscriptionId, Guid gymId)
+        //[HttpDelete("{productId:guid}")]
+        //public async Task<IActionResult> DeleteProduct(Guid productId)
         //{
-        //    var command = new DeleteProductCommand(subscriptionId, gymId);
+        //    var command = new DeleteProductCommand(productId);
 
-        //    var deleteGymResult = await _mediator.Send(command);
+        //    var deleteProductResult = await _mediator.Send(command);
 
-        //    return deleteGymResult.Match(
+        //    return deleteProductResult.Match(
         //        _ => NoContent(),
         //        Problem);
         //}
 
         [HttpGet]
-        public async Task<IActionResult> ListProducts(SearchParams? searchParams)
+        //[Authorize]
+        public async Task<IActionResult> ListProducts(Guid? id = null)
         {
-            var command = new ListProductsQuery(searchParams);
+            var command = new ListProductsQuery(id);
 
             var listProductsResult = await _mediator.Send(command);
 
             return Ok(listProductsResult);
             //return listProductsResult.Match(
-            //    gyms => Ok(gyms.ConvertAll(gym => new GymResponse(gym.Id, gym.Name))),
+            //    products => Ok(products.ConvertAll(product => new ProductResponse(product.Id, product.Name))),
             //    Problem);
         }
 
-        [HttpGet("{productId:guid}")]
-        public async Task<IActionResult> GetProduct(Guid productId)
+        [HttpGet("{productId:int}")]
+        public async Task<IActionResult> GetProduct(int productId)
         {
             var command = new GetProductQuery(productId);
 
             var getProductResult = await _mediator.Send(command);
 
             return Ok(getProductResult);
-            //return getGymResult.Match(
-            //    gym => Ok(new GymResponse(gym.Id, gym.Name)),
+            //return getProductResult.Match(
+            //    product => Ok(new ProductResponse(product.Id, product.Name)),
             //    Problem);
         }
     }

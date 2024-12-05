@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using Mapster;
 using MapsterMapper;
 using MediatR;
 using ProductManagement.Application.Common.Interfaces;
@@ -14,20 +15,18 @@ namespace ProductManagement.Application.Products.Commands.UpdateProduct
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>
     {
         private readonly IProductRepository _productRepository;
-        private readonly Mapper _mapper;
 
-        public UpdateProductCommandHandler(IProductRepository productRepository, Mapper mapper)
+        public UpdateProductCommandHandler(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _mapper = mapper;
         }
-        public Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            var product = _mapper.From(request).AdaptToType<Product>();
+            var product = request.Adapt<Product>();
 
-             _productRepository.UpdateProductAsync(product);
+            await _productRepository.UpdateProductAsync(product);
 
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
     }
 }

@@ -4,6 +4,7 @@
     Guid Id,
     string FirstName,
     string LastName,
+    string Phone,
     string Email,
     string Token);
 }

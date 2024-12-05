@@ -52,6 +52,7 @@ namespace ProductManagement.API.Controllers
                 authResult.User.Id,
                 authResult.User.FirstName,
                 authResult.User.LastName,
+                authResult.User.Phone,
                 authResult.User.Email,
                 authResult.Token);
         }
