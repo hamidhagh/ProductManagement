@@ -33,7 +33,7 @@ namespace ProductManagement.Infrastructure.Users.Persistence
             return await _dbContext.Users.FirstOrDefaultAsync(user => user.Email == email);
         }
 
-        public async Task<User?> GetByIdAsync(string userId)
+        public async Task<User?> GetByIdAsync(Guid userId)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(user => user.Id == userId);
         }

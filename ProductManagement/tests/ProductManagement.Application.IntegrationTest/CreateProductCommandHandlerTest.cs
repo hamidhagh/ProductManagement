@@ -19,23 +19,23 @@ namespace ProductManagement.Application.IntegrationTest
             var mapper = Substitute.For<Mapper>();
             
             var command = new CreateProductCommand(
-                name: "Test Product",
-                produceDate: new DateTime(2024, 12, 5),
-                manufacturePhone: "09121234567",
-                manufactureEmail: "test@gmail.com",
-                isAvailable: true,
-                userId: Guid.NewGuid().ToString()
+                Name: "Test Product",
+                ProduceDate: new DateTime(2024, 12, 5),
+                ManufacturePhone: "09121234567",
+                ManufactureEmail: "test@gmail.com",
+                IsAvailable: true,
+                UserId: Guid.NewGuid()
             );
 
             var product = new Product
             {
                 Id = Guid.NewGuid(),
-                Name = command.name,
-                ProduceDate = command.produceDate,
-                ManufacturePhone = command.manufacturePhone,
-                ManufactureEmail = command.manufactureEmail,
-                IsAvailable = command.isAvailable,
-                UserId = command.userId
+                Name = command.Name,
+                ProduceDate = command.ProduceDate,
+                ManufacturePhone = command.ManufacturePhone,
+                ManufactureEmail = command.ManufactureEmail,
+                IsAvailable = command.IsAvailable,
+                UserId = command.UserId
             };
 
             var productDto = new ProductDto

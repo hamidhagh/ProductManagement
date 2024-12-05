@@ -16,6 +16,6 @@ namespace ProductManagement.Domain.Products
         public string? ManufactureEmail { get; set; }
         public bool IsAvailable { get; set; }
         public User User { get; set; }
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
     }
 }

@@ -1,10 +1,13 @@
+using ProductManagement.API;
 using ProductManagement.Application;
 using ProductManagement.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddApplication()
-                    .AddInfrastructure(builder.Configuration);
+    builder.Services
+        .AddPresentation()
+        .AddApplication()
+        .AddInfrastructure(builder.Configuration);
 }
 // Add services to the container.
 

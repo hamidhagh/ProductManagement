@@ -14,6 +14,6 @@ namespace ProductManagement.Application.Common.DTOs
         public string? ManufacturePhone { get; set; }
         public string? ManufactureEmail { get; set; }
         public bool IsAvailable { get; set; }
-        public string? UserId { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

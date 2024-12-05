@@ -11,7 +11,7 @@ namespace ProductManagement.Domain.UnitTest
         {
             var user = new User()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
                 FirstName = "Test",
                 LastName = "Test",
                 Phone = "09121234567",

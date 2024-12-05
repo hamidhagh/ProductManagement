@@ -8,6 +8,6 @@ namespace ProductManagement.Application.Common
 {
     public class SearchParams
     {
-        public string? UserId { get; set; } = null;
+        public Guid? UserId { get; set; } = null;
     }
 }

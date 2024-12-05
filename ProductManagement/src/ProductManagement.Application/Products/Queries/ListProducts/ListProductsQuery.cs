@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProductManagement.Application.Products.Queries.ListProducts
 {
-    public record ListProductsQuery(SearchParams SearchParams) : IRequest<List<ProductDto>>
+    public record ListProductsQuery(SearchParams? SearchParams) : IRequest<List<ProductDto>>
     {
     }
 }

@@ -24,7 +24,12 @@ namespace ProductManagement.Application.Products.Queries.ListProducts
         }
         public async Task<List<ProductDto>> Handle(ListProductsQuery request, CancellationToken cancellationToken)
         {
-            var products = _productRepository.GetAllBySearchParamsAsync(request.SearchParams);
+            List<Product> products;
+            if (request.SearchParams == null)
+            {
+                products = await _productRepository.GetAllAsync();
+            }
+            products = await _productRepository.GetAllBySearchParamsAsync(request.SearchParams);
 
             return products.Adapt<List<ProductDto>>();
         }

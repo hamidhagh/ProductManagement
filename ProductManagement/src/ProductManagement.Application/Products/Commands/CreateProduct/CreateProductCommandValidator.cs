@@ -27,8 +27,8 @@ namespace ProductManagement.Application.Products.Commands.CreateProduct
                 .WithMessage("ManufactureEmail must be a valid email address.");
 
             RuleFor(x => x.UserId)
-                .NotEmpty().WithMessage("UserId is required.")
-                .Must(IsValidGuid).WithMessage("UserId must be a valid GUID.");
+                .NotEmpty().WithMessage("UserId is required.");
+                //.Must(IsValidGuid).WithMessage("UserId must be a valid GUID.");
         }
 
         private bool IsValidGuid(string userId)

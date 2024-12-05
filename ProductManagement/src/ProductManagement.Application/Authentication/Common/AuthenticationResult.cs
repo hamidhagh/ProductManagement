@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace ProductManagement.Application.Authentication.Common
 {
-    public record AuthenticationResult(User user, string token);
+    public record AuthenticationResult(User User, string Token);
 }

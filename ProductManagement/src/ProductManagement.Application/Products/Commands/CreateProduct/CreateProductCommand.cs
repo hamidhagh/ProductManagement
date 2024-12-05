@@ -10,5 +10,5 @@ using System.Threading.Tasks;
 namespace ProductManagement.Application.Products.Commands.CreateProduct
 {
     public record CreateProductCommand(string Name, DateTime ProduceDate, string? ManufacturePhone,
-        string? ManufactureEmail, bool IsAvailable, string UserId) : IRequest<ProductDto>;
+        string? ManufactureEmail, bool IsAvailable, Guid UserId) : IRequest<ProductDto>;
 }

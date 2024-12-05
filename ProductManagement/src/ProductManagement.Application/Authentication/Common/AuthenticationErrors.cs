@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProductManagement.Application.Authentication.Common
 {
-    internal static class AuthenticationErrors
+    public static class AuthenticationErrors
     {
         public static readonly Error InvalidCredentials = Error.Validation(
         code: "Authentication.InvalidCredentials",
