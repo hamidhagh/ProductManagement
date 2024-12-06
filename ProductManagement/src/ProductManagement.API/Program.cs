@@ -2,6 +2,7 @@ using Microsoft.OpenApi.Models;
 using ProductManagement.API;
 using ProductManagement.Application;
 using ProductManagement.Infrastructure;
+using ProductManagement.Infrastructure.Common.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -24,7 +25,7 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\""
+        Description = "Enter your token in the text input below."
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -45,6 +46,12 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ProductManagementDbContext>();
+    dbContext.Database.EnsureCreated();
+}
 // Configure the HTTP request pipeline.
 
 

@@ -50,9 +50,9 @@ namespace ProductManagement.API.Controllers
 
         [HttpGet]
         //[Authorize]
-        public async Task<IActionResult> ListProducts(Guid? id = null)
+        public async Task<IActionResult> ListProducts(Guid? userId = null)
         {
-            var command = new ListProductsQuery(id);
+            var command = new ListProductsQuery(userId);
 
             var listProductsResult = await _mediator.Send(command);
 

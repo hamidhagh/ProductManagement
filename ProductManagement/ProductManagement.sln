@@ -20,9 +20,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductManagement.API", "sr
 		{A95DC468-BA33-4B6B-90AF-0F2A5FED7EF5} = {A95DC468-BA33-4B6B-90AF-0F2A5FED7EF5}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.Domain.IntegrationTest", "tests\ProductManagement.Domain.IntegrationTest\ProductManagement.Domain.IntegrationTest.csproj", "{DC748EE2-696E-48DE-925B-4FE31C8BF5C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductManagement.Domain.IntegrationTest", "tests\ProductManagement.Domain.IntegrationTest\ProductManagement.Domain.IntegrationTest.csproj", "{DC748EE2-696E-48DE-925B-4FE31C8BF5C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.Application.IntegrationTest", "tests\ProductManagement.Application.IntegrationTest\ProductManagement.Application.IntegrationTest.csproj", "{098F6170-7163-49E5-AD84-8FEFB8E0338B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductManagement.Application.IntegrationTest", "tests\ProductManagement.Application.IntegrationTest\ProductManagement.Application.IntegrationTest.csproj", "{098F6170-7163-49E5-AD84-8FEFB8E0338B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F319960B-02F1-4C4C-8066-F1B91C448D96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{098F6170-7163-49E5-AD84-8FEFB8E0338B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{098F6170-7163-49E5-AD84-8FEFB8E0338B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{098F6170-7163-49E5-AD84-8FEFB8E0338B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F319960B-02F1-4C4C-8066-F1B91C448D96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F319960B-02F1-4C4C-8066-F1B91C448D96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F319960B-02F1-4C4C-8066-F1B91C448D96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F319960B-02F1-4C4C-8066-F1B91C448D96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
