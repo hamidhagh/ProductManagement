@@ -39,7 +39,9 @@ namespace ProductManagement.Infrastructure.Products.Persistence
 
         public async Task DeleteProductAsync(Product product)
         {
-            _dbContext.Remove(product);
+            var productToDelete = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == product.Id);
+
+            _dbContext.Remove(productToDelete);
 
             await _dbContext.SaveChangesAsync();
 
@@ -73,6 +75,11 @@ namespace ProductManagement.Infrastructure.Products.Persistence
         public async Task<Product> GetByIdAsync(int id)
         {
             return await _dbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
+        }
+
+        public async Task<Product> GetByIdNoTrackingAsync(int id)
+        {
+            return await _dbContext.Products.AsNoTracking().FirstOrDefaultAsync(product => product.Id == id);
         }
 
         public async Task UpdateProductAsync(Product product)

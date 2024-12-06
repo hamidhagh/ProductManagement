@@ -14,6 +14,7 @@ namespace ProductManagement.Application.Common.Interfaces
         Task UpdateProductAsync(Product product);
         Task DeleteProductAsync(Product product);
         Task<Product> GetByIdAsync(int id);
+        Task<Product> GetByIdNoTrackingAsync(int id);
         Task<List<Product>> GetAllAsync();
         Task<List<Product>> GetAllBySearchParamsAsync(Guid? id);
         Task<List<Product>> AddRangeAsync(List<Product> products);
